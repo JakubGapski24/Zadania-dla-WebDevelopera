@@ -1,0 +1,56 @@
+<!DOCTYPE HTML> <!-- stworzenie standardowego dokumentu HTML -->
+<html lang="pl">
+	<head>
+		<meta charset="utf-8">
+		<title>Zadanie 1</title> <!-- nadanie tytułu widocznego na zakładce w przeglądarce -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+		<link rel="stylesheet" href="styl.css" type="text/css"/> <!-- podpięcie zewnętrznego arkusza stylów CSS -->
+		<link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet"> <!-- ustalenie stylu czcionki -->
+	</head>
+	<body>
+
+	<div class="container">
+			<div class="table" id="content"></div>
+			
+			<script>
+				var data = {"kolumna1": ["Nagłówek 1", "Dane 1", "Dane 11", "Dane 12", "Dane 13", "Dane 14"],
+							"kolumna2": ["Nagłówek 2", "Dane 2", "Dane 21", "Dane 22", "Dane 23", "Dane 24"],
+							"kolumna3": ["Nagłówek 3", "Dane 3", "Dane 31", "Dane 32", "Dane 33", "Dane 34"]
+							};
+
+				var output = '<table width="100%" align="center" border="1" bordercolor="#303030" cellpadding="0" cellspacing="0">'; //tworzenie tabeli
+				var bg_color = '';
+				
+				for (i=0; i<=5; i++) {
+					output += '<tr>'; //nowy wiersz
+				
+					if (i != 0 && i % 2 == 0) {
+						bg_color = 'bgcolor="#D4E81A">'; //żółte tło w tabeli
+					}
+					else {
+						bg_color = 'bgcolor="#ffffff">'; //białe tło w tabeli
+					}
+					
+					switch (i) {
+						case 0:
+							//pogrubiona czcionka w pierwszym wierszu
+							output += '<td align="center"' + bg_color + '<b>' + data.kolumna1[i] + '</b></td>';
+							output += '<td align="center"' + bg_color + '<b>' + data.kolumna2[i] + '</b></td>';
+							output += '<td align="center"' + bg_color + '<b>' + data.kolumna3[i] + '</b></td>';
+							break;
+						case 1: case 2: case 3: case 4: case 5:
+							//reszta tabeli
+							output += '<td align="center"' + bg_color + data.kolumna1[i] + '</td>';
+							output += '<td align="center"' + bg_color + data.kolumna2[i] + '</td>';
+							output += '<td align="center"' + bg_color + data.kolumna3[i] + '</td>';
+							break;
+						output += '</tr>'; //koniec wiersza
+					}
+				}
+				output += '</table>'; //koniec tabeli
+				document.getElementById("content").innerHTML = output; //wyświetlenie tabeli
+				
+			</script>
+	</div>	
+	</body>
+</html>

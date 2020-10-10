@@ -1,0 +1,121 @@
+<!DOCTYPE HTML> <!-- stworzenie standardowego dokumentu HTML -->
+<html lang="pl">
+	<head>
+		<meta charset="utf-8">
+		<title>Zadanie 2 i 3</title> <!-- nadanie tytułu widocznego na zakładce w przeglądarce -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> <!-- podpięcie pliku css z bootstrapem -->
+		<link rel="stylesheet" href="styl.css" type="text/css"/> <!-- podpięcie zewnętrznego arkusza stylów CSS -->
+		<link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet"> <!-- ustalenie stylu czcionki -->
+		<!-- obsługa bootstrapa -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		
+	</head>
+	<body>
+		<div class="container">
+			<div class="select" onclick="showOptions()"> Sel &#8595 </div> <!--przycisk-->
+			<div class="s2019" id="s2019" onclick="showContent(2019)"> Rok 2019 </div> <!--rozwinięcie przycisku-->
+			<div class="s2020" id="s2020" onclick="showContent(2020)"> Rok 2020 </div>
+				<div class="row" id="row1"></div>
+				<div class="row" id="row2"></div>
+				<div class="row" id="row3"></div>
+				<div class="row" id="row4"></div>
+			
+				<script>
+					var data = {"wiersz1": ["Lp", "Nagłówek", "Data"],
+								"wiersz2": ["1", "Content 1", "20.02.2019"],
+								"wiersz3": ["2", "Content 2", "20.03.2020"],
+								"wiersz4": ["3", "Content 3", "03.03.2020"]
+								};
+								
+					for (i=0; i<=3; i++) { //wiersze
+						var outputRow = '';
+						for (j=0; j<=2; j++) { //kolumny
+							switch (j) { //zależnie od kolumny, tworzymy odpowiednią daną
+								case 0:
+									outputRow += '<div class="col-xs-3 col-sm-2 col-md-1">';
+									outputRow += getContent(i,j) + '</div>'; //wybór wiersza dla pierwszej kolumny
+									break;
+								case 1:
+									outputRow += '<div class="col-xs-6 col-sm-7 col-md-8">';
+									outputRow += getContent(i,j) + '</div>'; //wybór wiersza dla drugiej kolumny
+									break;
+								case 2:
+									outputRow += '<div class="col-xs-4 col-sm-3 col-md-2">';
+									outputRow += getContent(i,j) + '</div>'; //wybór wiersza dla trzeciej kolumny
+									break;
+							}
+						}
+						switch (i) { //wyświetlenie poszczególnych wierszy
+							case 0:
+								document.getElementById("row1").innerHTML = outputRow;
+								break;
+							case 1:
+								document.getElementById("row2").innerHTML = outputRow;
+								break;
+							case 2:
+								document.getElementById("row3").innerHTML = outputRow;
+								break;
+							case 3:
+								document.getElementById("row4").innerHTML = outputRow;
+								break;
+						}
+					}
+					
+					function getContent(i, j) { //wybranie odpowiedniej danej
+						switch (i) {
+							case 0:
+								return data.wiersz1[j]; //zwraca daną z odpowiedniej kolumny dla wiersza 1
+							case 1:
+								return data.wiersz2[j]; //zwraca daną z odpowiedniej kolumny dla wiersza 2
+							case 2:
+								return data.wiersz3[j]; //zwraca daną z odpowiedniej kolumny dla wiersza 3
+							case 3:
+								return data.wiersz4[j]; //zwraca daną z odpowiedniej kolumny dla wiersza 4
+						}
+					}
+				
+					function showOptions() { //funkcja rozwijająca przycisk "SEL"
+						document.getElementById("s2019").style.display = "block";
+						document.getElementById("s2020").style.display = "block";
+					}
+				
+					function showContent(date) { //wyświetlenie danych dla wybranego roku 
+						var d = '';
+						for (i=0; i<=2; i++) { //sprawdzenie ostatniego elementu (daty) każdego z wierszy (oprócz pierwszego, bo tam nie ma daty)
+							switch (i) {
+								case 0:
+									d = data.wiersz2[2].substring(6,10); //zapisanie samego roku
+									if (d != date) { //jeśli odczytany rok równy temu, który wybrano przez wciśnięcie przycisku, to wyświetlaj dany wiersz
+										document.getElementById("row2").style.display = "none";
+									}
+									else {
+										document.getElementById("row2").style.display = "block";
+									}
+									break;
+								case 1:
+									d = data.wiersz3[2].substring(6,10);
+									if (d != date) {
+										document.getElementById("row3").style.display = "none";
+									}
+									else {
+										document.getElementById("row3").style.display = "block";
+									}
+									break;
+								case 2:
+									d = data.wiersz4[2].substring(6,10);
+									if (d != date) {
+										document.getElementById("row4").style.display = "none";
+									}
+									else {
+										document.getElementById("row4").style.display = "block";
+									}
+									break;
+							}
+						}
+					}
+				</script>
+		</div>	
+	</body>
+</html>
